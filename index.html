@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quotes</title>
+    <style>
+
+        *{ 
+            /* background: url("backgroundimage.png"); */
+            margin:0px;
+            padding: 0px;
+            background-color: rgb(135, 98, 170);
+        }
+        
+      
+        #quotes{
+          color: white;
+          font-size: 90px;
+          margin:30px;
+        }
+
+        #author{
+          color: white;
+          font-size: 23px;
+           
+           margin:30px;
+        }
+
+        #newbutton{
+            cursor: pointer;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            height: 43px;
+            border-radius: 32px;
+            width: 230px;text-align: center;
+            justify-content: center;
+            transition-delay: 20ms;
+            background-color: rgb(172, 144, 73);
+            margin:30px;
+        }
+
+        #newbutton:hover{
+            background-color: brown;
+            
+        }
+
+        section{
+            display: flex;
+            margin-top: 240px;
+            justify-content: center;
+        }
+        .title{
+            text-align: center;
+            font-size: 23px;
+            margin:30px;
+            padding-top:150px;
+            display: block;
+            color: white;
+            
+        }
+    .name{
+        margin: 23px;
+        color: white;
+    }
+    </style>
+</head>
+<body>
+    <section class="title">
+        <i class="text"><b>" If You accidently take the wrong decision then it is the right one decision in the Future "</b></i>
+        <div class="name"><b><i>Pranav Vishwakarma</i></div>
+    </section>
+    <section>
+    <div class="box">
+    <div id="quotes"></div>
+    <div id="author"></div>
+    <button id="newbutton">New Quotes</button>
+</section>
+
+
+</div>
+</body>
+<script>
+    const quotes=document.getElementById('quotes')
+    const author=document.getElementById('author')
+    const newbutton=document.getElementById('newbutton');
+    let  realdata="";
+     const getNewQuotes=()=>{
+        let random=Math.floor(Math.random()*10);
+        quotes.innerText=`${realdata[random].text}`;
+        author.innerText=`${realdata[random].author}`;
+
+        // console.log(realdata[random].text);
+
+
+     }
+    const getQuotes= async()=>{
+        const api="https://type.fit/api/quotes";
+        try{
+           const data = await fetch(api);
+           realdata=await data.json();
+           getNewQuotes();
+
+        }
+        catch(error){
+         
+        };
+    }
+    newbutton.addEventListener('click',getNewQuotes);
+
+    getQuotes();
+    
+</script>
+</html>
